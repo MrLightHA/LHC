@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LHC:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LHC_jar</output-path>
+    <root id="archive" name="LHC.jar">
+      <element id="module-output" name="LHC" />
+    </root>
+  </artifact>
+</component>
