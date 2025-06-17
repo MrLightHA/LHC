@@ -1,0 +1,4 @@
+name: LHC
+version: '${project.version}'
+main: me.lightha.lhc.LHC
+api-version: '1.16'
