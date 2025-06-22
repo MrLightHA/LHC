@@ -67,3 +67,20 @@ settings.getOrDefault("startRadius", 1);
 
 Использовать экземпляры провайдера партиклов можно реализовав интерфейс IParticles
 
+
+# ItemBuilder
+
+Теперь вы можете создавать ItemStack используя ItemBuilder
+пример создания предмета
+new ItemBuilder(material)
+                .setHeadBase64(base64)
+                .name(name)
+                .lore(lore)
+                .flag(flags)
+                .glow(glow)
+                .setLeatherColor(leatherColor)
+                .setPotionColor(color)
+                .amount(amount)
+                .setDamage(damage)
+                .build();
+
