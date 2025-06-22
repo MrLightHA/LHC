@@ -8,5 +8,4 @@ import me.lightha.lhc.particle.impl.ParticleUtilsImpl;
 public interface IParticles {
     ParticleUtils particleUtils = new ParticleUtilsImpl();
     ParticleManager particleManager = LHC.instance.getParticleManager();
-
 }

@@ -1,5 +1,4 @@
 package me.lightha.lhc.gui;
 
-public class GuiBuilder {
-
+public class MenuImpl {
 }

@@ -3,3 +3,4 @@
 /target/
 .idea/
 *.iml
+/src/java/me/lightha/lhc/gui/
