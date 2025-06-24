@@ -4,19 +4,18 @@ import lombok.Data;
 import me.lightha.lhc.api.IContainer;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Data
 public class InteractiveItem implements IContainer {
     private List<String> actions;
-    private ItemStack itemBuilder;
-    private Map<String, Object> containerValues;
+    private final ItemStack itemBuilder;
+    private Map<String, Object> containerValues = new HashMap<>();
 
-    public InteractiveItem(List<String> actions, ItemStack itemBuilder, Map<String, Object> metadata) {
-        this.actions = actions;
+    public InteractiveItem(ItemStack itemBuilder) {
         this.itemBuilder = itemBuilder;
-        this.containerValues = metadata;
     }
 
     @Override

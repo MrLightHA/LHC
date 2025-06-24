@@ -2,7 +2,11 @@
 
 # LHC (LightHACore) - Библиотека для удобной разработки плагинов
   На данный момент разрабатывается только на **версию 1.16**
-  В себе содержит генератор партиклов с формами
+  В себе содержит
+
+- ParticleBuilder
+- ItemBuilder
+- Menu system
 
 # Генератор партиклов
    **Использование ParticleBuilder**
@@ -72,6 +76,7 @@ settings.getOrDefault("startRadius", 1);
 
 Теперь вы можете создавать ItemStack используя ItemBuilder
 пример создания предмета
+```java
 new ItemBuilder(material)
                 .setHeadBase64(base64)
                 .name(name)
@@ -83,4 +88,61 @@ new ItemBuilder(material)
                 .amount(amount)
                 .setDamage(damage)
                 .build();
+                
+```
+
+# Menu - Создание своих меню
+
+Пример создания меню
+
+```java
+public class TestGui extends MenuParent {
+
+    public TestGui() {
+        super("Тест меню", 
+                Map.of(0, "X"), // K - слот; V - ключ предмета
+                Map.of("X", new InteractiveItem(new ItemBuilder(Material.STONE).build()))); // K - ключ предмета; V InteractiveItem
+    }
+
+    @Override
+    public void create(Object... objects) {
+        // Создание меню
+        createMenu(menu -> { 
+            menu.removeOnClose(true);
+            menu.onClick(e -> e.setCancelled(true));
+            
+            // Вы также можете передавать свои данные в меню, пример
+            menu.setData("page", 1);
+        });
+        fill(objects);
+    }
+
+    @Override
+    public void fill(Object... objects) {
+        getInventoryItemSlotsMap().forEach((slot, itemKey) -> {
+            InteractiveItem actionItem = getItemMap().get(itemKey);
+            if (actionItem == null) return;
+            ItemStack item = actionItem.getItemBuilder();
+            if (item == null) item = new ItemStack(Material.AIR);
+            MenuItem menuItem = menuManager.createItem(item, click -> {
+                // Действие при клике по предмету
+                click.getWhoClicked().sendMessage("Тест клик");
+            });
+
+            getMenu().setItem(slot, menuItem);
+        });
+    }
+}
+```
+
+**Pagination**
+
+Вы можете добавить аннотацию @Paginated и получить доступ к интерфейсу Pagination
+использовать его можно через getPagination()
+
+**FakeInventory**
+
+Также для работы с инвентарями, неважно созданы они с помощью MenuParent, вы можете реализовать интерфейс IFakeInventory
+и изменять данные инвентаря через пакеты, пример
+```fakeInv.replaceTitle(player, "Фейк заголовок");```
 
