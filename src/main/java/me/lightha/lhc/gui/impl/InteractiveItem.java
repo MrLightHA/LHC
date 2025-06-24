@@ -1,11 +1,13 @@
-package me.lightha.lhc.gui;
+package me.lightha.lhc.gui.impl;
 
+import lombok.Data;
 import me.lightha.lhc.api.IContainer;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Map;
 
+@Data
 public class InteractiveItem implements IContainer {
     private List<String> actions;
     private ItemStack itemBuilder;
