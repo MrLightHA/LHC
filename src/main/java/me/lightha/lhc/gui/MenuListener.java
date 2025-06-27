@@ -1,6 +1,5 @@
 package me.lightha.lhc.gui;
 
-import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
