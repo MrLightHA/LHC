@@ -146,3 +146,34 @@ public class TestGui extends MenuParent {
 и изменять данные инвентаря через пакеты, пример
 ```fakeInv.replaceTitle(player, "Фейк заголовок");```
 
+_NEW_
+
+**Executor**
+
+С версии 1.4, доступно создание команд через Executor, забудьте про 1 клас где ничего не ясно
+
+Executor позволяет создать очень гибкие команды, использование Executor
+
+```java
+Executor.create("test", Sender.PLAYER) // Название команды, для кого преднозначена команда (ALL, PLAYER, CONSOLE)
+               .register( // Добавляем сабкоманду
+                       "example", // Саб команда
+                       "пример сабкоманды", // Описание
+                       "test.example", // Разрешение на выполнение сабкоманды (необязательно)
+                       ((commandSender, args) -> { // при выполнении сабкоманды
+                         // Для теста выдадим игроку 10 алмазов
+                           if (commandSender instanceof Player player) {
+                               player.getInventory().addItem(new ItemStack(Material.DIAMOND));
+                               player.sendMessage("Тест команда на 10 алмазов");
+                           }
+                       }),
+                       // Таб комплитор для саб команды
+                       ((commandSender, args) -> List.of("Тест", "Таб", "Комплитора")))
+               // Дополнительные параметры для исключений
+               .onEmptyArgs(((commandSender, strings) -> commandSender.sendMessage("Нет аргументов")))
+               .onNoPermission((commandSender, strings) -> commandSender.sendMessage("Нет прав!"))
+               .onUnknownSubcommand((commandSender, strings) -> commandSender.sendMessage("Такой сабкоманды нет"))
+               .bind(this); // регестрирует саму команду; Аргумент - JavaPlugin
+```
+
+Теперь вы можете выполнить в игре команду **/test example**
